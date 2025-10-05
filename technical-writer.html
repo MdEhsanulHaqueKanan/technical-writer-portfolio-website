@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ehsanul | Technical Writer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+    </style>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.1.0",
+    "react/jsx-runtime": "https://esm.sh/react@^19.1.0/jsx-runtime",
+    "react-dom/client": "https://esm.sh/react-dom@^19.1.0/client",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "react/": "https://esm.sh/react@^19.1.0/"
+  }
+}
+</script>
+<!-- The broken CSS link that was here has been removed. -->
+</head>
+  <body class="bg-slate-900 text-slate-300">
+    <div id="root"></div>
+    <script type="text/babel" data-type="module" data-presets="react,typescript">
+      import React, { useState, useMemo } from 'react';
+      import ReactDOM from 'react-dom/client';
+
+      // --- From types.ts ---
+      const TechCategory = {
+        AI_LLM: 'AI & LLM Tooling',
+        BACKEND: 'Backend',
+        FRONTEND: 'Frontend & UI',
+        DATA_SCIENCE: 'Data Science',
+        MLOPS_DEPLOYMENT: 'MLOps & Deployment',
+        CLOUD: 'Cloud Platforms',
+      };
+      
+      // --- From components/Icons.tsx ---
+      const PythonIcon = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 fill-current"><title>Python</title><path d="M12.13.29C11.93.1 11.7.0 11.45.0H7.62c-.65 0-1.2.53-1.23 1.18L6.37 3.5c0 .03.01.06.02.09l.02.09C6.41 3.68 6.4 3.68 6.4 3.68c-.01-.03-.02-.06-.02-.09L6.3 1.32c-.03-.65-.58-1.18-1.23-1.18H1.2c-.65 0-1.2.53-1.23 1.18L-.05 3.5c0 .03.01.06.02.09l.02.09c.01 0 .01 0 .01.01-.01-.03-.02-.06-.02-.09L-.1 1.32C-.13.67.39.1.98.02A1.2 1.2 0 0 1 1.2 0h3.83c.25 0 .48.1.65.29l.01.01c.17.19.29.48.29.76v3.25c0 .28-.12.57-.29.76l-.01.01c-.17.19-.4.29-.65.29H1.2c-.65 0-1.2-.53-1.23-1.18l-.02-2.34h.02c.01.65.56 1.18 1.21 1.18h3.83c.65 0 1.2-.53 1.23-1.18V1.34c0-.03-.01-.06-.02-.09L6.4 1.25c-.01 0-.01 0-.01-.01c.01.03.02.06.02.09v2.28c.03.65.58 1.18 1.23 1.18h3.83c.65 0 1.2-.53 1.23-1.18l.02-2.28v.02c.01.65.56 1.18 1.21 1.18h3.83c.65 0 1.2-.53 1.23-1.18l.02-2.28c0-.28-.12-.57-.29-.76l-.01-.01c-.17-.19-.4-.29-.65-.29h-3.83c-.25 0-.48-.1-.65-.29l-.01-.01c-.17-.19-.29-.48-.29-.76V1.34c0-.28.12-.57.29-.76l.01-.01c.17-.19.4-.29-.65-.29h3.83c.65 0 1.2.53 1.23 1.18l.08 2.31c0 .03-.01.06-.02.09l-.02.09c-.01 0-.01 0-.01-.01c.01-.03.02-.06.02-.09l.08-2.31c.03-.65.58-1.18 1.23-1.18H22.8c.65 0 1.2.53 1.23 1.18l.08 2.31c0 .03-.01.06-.02-.09l-.02.09c-.01 0-.01 0-.01-.01c.01-.03.02-.06.02-.09l.08-2.31c.03-.65-.39-1.2-.98-1.26a1.2 1.2 0 0 1-.25-.02h-3.83c-.25 0-.48-.1-.65-.29l-.01-.01c-.17-.19-.29-.48-.29-.76V1.34c0-.28.12-.57.29-.76l.01-.01C18.6.39 18.83.29 19.08.29h3.72c.65 0 1.2.53 1.23 1.18l.02 2.34H24c-.03-.65-.58-1.18-1.23-1.18h-3.72c-.65 0-1.2.53-1.23 1.18v2.28c0 .28.12.57.29.76l.01.01c.17.19.4.29.65.29h3.72c.65 0 1.2.53 1.23 1.18l.02 2.34h-.02c-.01-.65-.56-1.18-1.21-1.18h-3.72c-.65 0-1.2.53-1.23 1.18v2.28c0 .28.12.57.29.76l.01.01c.17.19.4.29.65.29h3.72c.65 0 1.2.53 1.23 1.18l.02 2.34H24c-.03-.65-.58-1.18-1.23-1.18h-3.72c-.65 0-1.2.53-1.23 1.18v2.28c0 .28.12.57.29.76l.01.01c.17.19.4.29.65.29h3.83a1.2 1.2 0 0 0 1.23-1.18l.02-2.35v-.02c.03.65-.39 1.2-.98 1.26a1.2 1.2 0 0 1-.25.02h-3.83c-.25 0-.48-.1-.65-.29l-.01-.01c-.17-.19-.29-.48-.29-.76v3.25c0 .28.12.57.29.76l.01.01c.17.19.4.29.65.29h3.83c.65 0 1.2.53 1.23-1.18l.08-2.31c0-.03-.01-.06-.02-.09l-.02-.09c-.01 0-.01 0-.01-.01c.01.03.02.06.02.09l.08-2.31c.03-.65.58-1.18 1.23-1.18H22.8c.65 0 1.2.53 1.23 1.18l.08 2.31c0-.03-.01-.06-.02-.09l-.02-.09c-.01 0-.01 0-.01-.01c.01.03.02.06.02.09l.08-2.31c.03-.65-.39-1.2-.98-1.26a1.2 1.2 0 0 1-.25-.02h-3.83c-.25 0-.48-.1-.65-.29l-.01-.01c-.17-.19-.29-.48-.29-.76V13.4c0-.28.12-.57.29-.76l.01-.01c.17-.19.4-.29.65-.29h3.83c.65 0 1.2.53 1.23 1.18l.02 2.34H24c-.03-.65-.58-1.18-1.23-1.18h-3.83c-.65 0-1.2.53-1.23 1.18v2.28c0 .28.12.57.29.76l.01.01c.17.19.4.29.65.29h3.83c.65 0 1.2.53 1.23 1.18l.02 2.28v-.02c-.01-.65-.56-1.18-1.21-1.18h-3.83c-.65 0-1.2.53-1.23 1.18v2.28c0 .28.12.57.29.76l.01.01c.17.19.4.29.65.29h3.83c.25 0 .48.1.65.29l.01.01c.17.19.29.48.29.76v3.25c0 .28-.12.57-.29-.76l-.01.01c-.17-.19-.4-.29-.65-.29h-3.83c-.65 0-1.2-.53-1.23-1.18l-.08-2.31c0-.03.01-.06.02-.09l.02-.09c.01 0 .01 0 .01.01c-.01.03-.02.06-.02.09l-.08 2.31c-.03.65-.58-1.18-1.23-1.18H1.2c-.65 0-1.2-.53-1.23-1.18l-.08-2.31c0-.03.01-.06.02-.09l.02-.09c.01 0 .01 0 .01.01c-.01.03-.02.06-.02.09l-.08 2.31c-.03.65.39 1.2.98 1.26c.08.01.17.02.25.02h3.83c.25 0 .48-.1.65-.29l.01-.01c.17-.19.29-.48.29-.76V13.4c0-.28-.12-.57-.29-.76l-.01-.01c-.17-.19-.4-.29-.65-.29H1.2c-.65 0-1.2-.53-1.23-1.18l-.02-2.34h.02c.01.65.56 1.18 1.21 1.18h3.83c.65 0 1.2-.53 1.23-1.18V7.6c0-.28-.12-.57-.29-.76L6.4 6.83c-.17-.19-.4-.29-.65-.29H1.85c-.65 0-1.2-.53-1.23-1.18l-.02-2.28v.02c.01.65.56 1.18 1.21 1.18h3.83c.65 0 1.2-.53 1.23-1.18l.02-2.28c0-.28.12-.57.29-.76l.01-.01c.17-.19.4-.29-.65-.29h3.72c.65 0 1.2.53 1.23 1.18l.02 2.34h-.02c-.01-.65-.56-1.18-1.21-1.18h-3.72c-.65 0-1.2.53-1.23 1.18v2.28c0 .28.12-.57.29-.76l.01.01c.17.19.4.29.65.29h3.72c.65 0 1.2.53 1.23 1.18l.02 2.34h-.02c-.01-.65-.56-1.18-1.21-1.18h-3.72c-.65 0-1.2-.53-1.23 1.18v2.28c0 .28.12-.57.29-.76l.01.01c.17.19.4.29.65.29h3.72c.65 0 1.2.53 1.23 1.18l.02 2.28v-.02c-.01-.65-.56-1.18-1.21-1.18h-3.72c-.65 0-1.2-.53-1.23 1.18v2.28c0 .28.12-.57.29-.76l.01.01c.17.19.4.29.65.29h3.72c.25 0 .48.1.65.29l.01.01c.17.19.29.48.29.76v3.25c0 .28-.12.57-.29-.76l-.01.01c-.17-.19-.4-.29-.65-.29H7.62c-.65 0-1.2-.53-1.23-1.18l-.02-2.34h.02c.01.65.56 1.18 1.21 1.18h3.83c.65 0 1.2-.53 1.23-1.18v-2.28c0-.28.12-.57.29-.76l.01-.01c.17-.19.4-.29.65-.29h3.83c.25 0 .48-.1.65-.29l-.17.17Z"/></svg>;
+      const FlaskIcon = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 fill-current"><title>Flask</title><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12c6.628 0 12-5.373 12-12S18.628 0 12 0zm5.42 16.547a.56.56 0 0 1-.396.165.57.57 0 0 1-.396-.949c.817-.817 1.29-1.92 1.29-3.076 0-1.157-.472-2.26-1.29-3.077a.56.56 0 0 1 0-.792.56.56 0 0 1 .792 0c1.013 1.012 1.59 2.37 1.59 3.869s-.577 2.856-1.59 3.868zM8.37 6.165a.56.56 0 0 1 .396-.165.57.57 0 0 1 .396.949c-.817.817-1.29 1.92-1.29 3.076s.472 2.26 1.29 3.077a.56.56 0 0 1 0 .792.56.56 0 0 1-.792 0C6.357 13.18 5.78 11.82 5.78 10.33c0-1.492.577-2.857 1.59-3.869a.56.56 0 0 1 .792 0c.11.11.165.253.165.396a.56.56 0 0 1-.157.396l-.008.008zm3.076 7.037c-2.025 0-3.668-1.643-3.668-3.668 0-2.025 1.643-3.668 3.668-3.668 2.025 0 3.668 1.643 3.668 3.668s-1.643 3.668-3.668 3.668z"/></svg>;
+      const DockerIcon = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 fill-current"><title>Docker</title><path d="M23.205 9.155c-.25-.219-.57-.34-.905-.34h-3.411v-3.23c0-.65-.53-1.18-1.18-1.18h-1.956c-1.35 0-2.64.42-3.66 1.18-.01 0-.01 0 0 0h-.01c-.01 0-.01.01 0 0-1.02-.76-2.31-1.18-3.66-1.18H6.465c-.65 0-1.18.53-1.18 1.18v3.23H1.7c-.335 0-.655.121-.905.34C.03 9.755 0 10.885 0 10.885v2.23c0 .33.27.6.6.6h.6v.68c0 .33.27.6.6.6h.6v.68c0 .33.27.6.6.6h.6v.68c0 .33.27.6.6.6H18c.33 0 .6-.27.6-.6v-.68c.33 0 .6-.27.6-.6h.6c.33 0 .6-.27.6-.6h.6c.33 0 .6-.27.6-.6h.6c.33 0 .6-.27.6-.6v-2.23s.03-1.13-.795-1.73zM7.644 6.435h1.956c.65 0 1.18.53 1.18 1.18v1.18H7.644V6.435zm7.59 0h1.956c.65 0 1.18.53 1.18 1.18v1.18h-3.136V6.435zm-5.32 3.54h3.136v2.36H9.914v-2.36zm-2.27 0h1.09v2.36H7.644v-2.36zm9.86 0h1.09v2.36h-1.09v-2.36zm-2.27 0h1.09v2.36h-1.09v-2.36zm-5.32 0h1.09v2.36h-1.09v-2.36z"/></svg>;
+      const TensorFlowIcon = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 fill-current"><title>TensorFlow</title><path d="M12.01 0v1.543c2.422 1.206 4.398 2.923 5.86 5.06h3.045C19.553 3.29 16.096.34 12.01 0zM1.085 6.602h3.045c1.462-2.137 3.438-3.854 5.86-5.06V0C5.904.34 2.447 3.29 1.085 6.602zM12.01 24v-1.543c-2.422-1.206-4.398-2.923-5.86-5.06H3.105c1.362 3.308 4.819 6.258 8.905 6.603zM22.915 17.398h-3.045c-1.462 2.137-3.438 3.854-5.86 5.06V24c4.086-.34 7.543-3.29 8.905-6.602zM0 12.01c0-.66.537-1.201 1.2-1.201h21.6c.663 0 1.2.541 1.2 1.201s-.537 1.201-1.2 1.201H1.2c-.663 0-1.2-.54-1.2-1.201z"/></svg>;
+      const PyTorchIcon = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 fill-current text-red-500"><title>PyTorch</title><path d="M4.394 4.393c-.488.488-.488 1.28 0 1.768l.003.002 6.757 3.896.002.004c.244.14.542.22.845.22.302 0 .6-.078.845-.22l.002-.004 6.757-3.896.003-.002c.488-.488.488-1.28 0-1.768a1.246 1.246 0 0 0-1.768 0l-5.837 3.366-5.837-3.366a1.246 1.246 0 0 0-1.768 0zm15.212 8.849c.488-.488.488-1.28 0-1.768a1.246 1.246 0 0 0-1.768 0l-3.368 5.84-3.368-5.84a1.251 1.251 0 0 0-1.768 0c-.488.488-.488 1.28 0 1.768l.002.003 3.899 6.756.003.002c.244.423.705.68 1.204.68.5 0 .96-.257 1.204-.68l.003-.002 3.896-6.756zm-16.98 1.768c-.488-.488-.488-1.28 0-1.768s1.28-.488 1.768 0l.002.002 3.899 6.756.003.002c.244.423.705.68 1.204.68.5 0 .96-.257 1.204-.68l.003-.002L12 12.434l-1.768-3.065-5.838-3.366a1.246 1.246 0 0 0-1.768 0c-.488.488-.488 1.28 0 1.768l.003.002 6.757 3.896.002.004c.244.14.542.22.845.22.05 0 .1-.004.15-.01l-4.99-8.647z"/></svg>;
+      const AWSIcon = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 fill-current"><title>Amazon Web Services</title><path d="M12.332 23.332a.584.584 0 0 1-.58-.335L0 2.668.583 2.083 4.15 6.5l3.25-3.083L12.083 0l4.667 3.417-3.25 3.083 3.567-4.416.583.585L12.912 23.002a.584.584 0 0 1-.58.33zm1.188-7.917c.5 1.583.917 2.916 1.5 4.333l3.583-11.416-3.75 3.416zm-2.375 0-3.75-3.416L3.333 19.75c.583-1.417 1-2.75 1.5-4.333zm-2.083-4.5H15.25a33.159 33.159 0 0 1-3.166 2.083A33.11 33.11 0 0 1 9.063 10.915z"/></svg>;
+      const ReactIcon = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 fill-current"><title>React</title><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-3.328-8.52a.75.75 0 0 1-.65-.367c-1.488-2.618-1.488-5.83 0-8.448a.75.75 0 1 1 1.3.734c-1.25 2.2-1.25 5.08 0 7.28a.75.75 0 0 1-.65 1.134zM12 7.75a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/><path d="M12 21.25a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zM19.328 12.52a.75.75 0 0 1-.65-1.134c1.25-2.2 1.25-5.08 0-7.28a.75.75 0 1 1 1.3-.734c1.488 2.618 1.488 5.83 0 8.448a.75.75 0 0 1-.65.366z"/></svg>;
+      const GitHubIcon = ({ className = 'w-6 h-6' }) => (
+        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className={className}>
+          <title>GitHub</title>
+          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+        </svg>
+      );
+      const LinkedInIcon = ({ className = 'w-6 h-6' }) => (
+        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className={className}>
+          <title>LinkedIn</title>
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.063 2.063 0 0 1 2.063-2.065 2.063 2.063 0 0 1 2.063 2.065c0 1.14-.925 2.065-2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/>
+        </svg>
+      );
+      const EmailIcon = ({ className = 'w-6 h-6' }) => (
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className}>
+              <path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z" />
+              <path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
+          </svg>
+      );
+
+      // --- From constants.tsx ---
+      const TECH = {
+          PYTHON: { name: 'Python', icon: <PythonIcon /> },
+          FLASK: { name: 'Flask', icon: <FlaskIcon /> },
+          DOCKER: { name: 'Docker', icon: <DockerIcon /> },
+          TENSORFLOW: { name: 'TensorFlow', icon: <TensorFlowIcon /> },
+          PYTORCH: { name: 'PyTorch', icon: <PyTorchIcon /> },
+          AWS: { name: 'AWS', icon: <AWSIcon /> },
+          REACT: { name: 'React', icon: <ReactIcon /> },
+          TYPESCRIPT: { name: 'TypeScript', icon: <div className="w-6 h-6 flex items-center justify-center text-xs font-bold text-blue-400">TS</div> },
+          GITHUB: { name: 'GitHub', icon: <GitHubIcon /> },
+          DOCUSAURUS: { name: 'Docusaurus', icon: <div className="w-6 h-6 flex items-center justify-center text-xs font-bold text-green-400">D</div> },
+          MARKDOWN: { name: 'Markdown', icon: <div className="w-6 h-6 flex items-center justify-center text-xs font-bold">M</div> },
+          MERMAID: { name: 'Mermaid.js', icon: <div className="w-6 h-6 flex items-center justify-center text-xs font-bold">{"{;}"}</div> },
+          POSTMAN: { name: 'Postman', icon: <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 fill-current text-orange-500"><title>Postman</title><path d="M22.583 11.292c0-3.32-2.688-6.008-6-6.008H6.008C2.688 5.284 0 7.973 0 11.292c0 3.319 2.688 6.008 6.008 6.008h10.575c3.312 0 6-2.689 6-6.008zm-6-4.506c2.484 0 4.5 2.016 4.5 4.506s-2.016 4.506-4.5 4.506H6.008c-2.484 0-4.5-2.016-4.5-4.506s2.016-4.506 4.5-4.506h10.575zM16.575 9.1c-1.242 0-2.25 1.008-2.25 2.25s1.008 2.25 2.25 2.25 2.25-1.008 2.25-2.25-1.008-2.25-2.25-2.25z"/></svg> },
+          SEO: { name: 'SEO', icon: <div className="w-6 h-6 flex items-center justify-center text-xs font-bold">SEO</div> },
+      };
+      
+// Find and replace this entire block
+      const PROJECTS = [
+        {
+          title: "API Documentation for Serverless ML App",
+          summary: "Comprehensive API documentation for a full-stack MLOps project. Includes architectural diagrams, API endpoint references, and step-by-step deployment guides.",
+          image: "/public/assets/images/portfolio-writing/api-docs.png", // Corrected Path
+          highlights: [
+            "Wrote clear explanations for complex serverless architecture (AWS Lambda, API Gateway).",
+            "Used Mermaid.js to create easy-to-understand architecture diagrams within the docs.",
+            "Documented all API endpoints with examples for requests and responses.",
+            "Provided a step-by-step guide for developers to deploy and extend the system."
+          ],
+          techStack: [TECH.DOCUSAURUS, TECH.MARKDOWN, TECH.MERMAID, TECH.POSTMAN],
+          liveDemoUrl: "https://github.com/MdEhsanulHaqueKanan/aws-serverless-youtube-predictor#api-documentation-", 
+          sourceCodeUrl: "https://github.com/MdEhsanulHaqueKanan/aws-serverless-youtube-predictor",
+        },
+        {
+          title: "In-Depth Article: Intro to Autoencoders",
+          summary: "A long-form technical article for IBM explaining the theory and practical application of autoencoders using Python and Keras for an audience of data scientists.",
+          image: "/public/assets/images/portfolio-writing/autoencoder-article.png", // Corrected Path
+          highlights: [
+            "Broke down complex deep learning concepts into digestible sections.",
+            "Provided complete, runnable Python code examples to demonstrate the theory.",
+            "Targeted relevant keywords for technical SEO to improve visibility.",
+            "Achieved a clear and professional tone suitable for the IBM brand."
+          ],
+          techStack: [TECH.PYTHON, TECH.TENSORFLOW, TECH.SEO],
+          liveDemoUrl: "https://www.freelancer.com/community/articles/introduction-to-autoencoders-how-to-use-python-and-keras-for-dimensionality-reduction",
+          sourceCodeUrl: null,
+        },
+        {
+          title: "Knowledge Base: Managed WordPress Guide",
+          summary: "A user-focused knowledge base article designed to guide new customers through the initial setup of a managed WordPress cluster, aiming to reduce support tickets.",
+          image: "/public/assets/images/portfolio-writing/knowledge-base.png", // Corrected Path
+          highlights: [
+            "Used simple language and a step-by-step format for a non-technical audience.",
+            "Included annotated screenshots to guide users through the interface.",
+            "Structured the article to proactively answer the most common user questions.",
+            "Focused on clarity and action-oriented instructions to ensure user success."
+          ],
+          techStack: [TECH.MARKDOWN, TECH.SEO],
+          liveDemoUrl: "https://www.togglebox.com/knowledge-base/managed-wordpress-cluster/",
+          sourceCodeUrl: null,
+        },
+        {
+          title: "Case Study: Microservices for E-commerce",
+          summary: "Authored a detailed case study analyzing the benefits of a microservices architecture for a growing e-commerce platform for a semi-technical audience.",
+          image: "/public/assets/images/portfolio-writing/case-study.png", // Corrected Path
+          highlights: [
+            "Translated complex DevOps concepts into business benefits (e.g., scalability, resilience).",
+            "Used diagrams to contrast monolithic vs. microservices architectures.",
+            "Structured the narrative as a problem/solution story to engage readers.",
+            "Clearly articulated the long-term value proposition for decision-makers."
+          ],
+          techStack: [TECH.MARKDOWN],
+          liveDemoUrl: "https://www.togglebox.com/case-studies/microservices-and-scalable-hosting-for-ecommerce-platforms/",
+          sourceCodeUrl: null,
+        },
+        {
+          title: "AuraScanAI: Vehicle Damage Assessment System",
+          summary: "An advanced, end-to-end computer vision project with a stunning, data-driven React frontend. This project also features comprehensive README documentation.",
+          image: "/public/assets/images/portfolio/aurascan-ai.png", // Corrected Path
+          highlights: [
+            "Authored a detailed README file explaining the project setup, architecture, and usage.",
+            "Custom-trained a Vision Transformer (ViT) model on over 15,500 images.",
+            "Architected a decoupled system with a Flask/PyTorch API and a React frontend on Vercel.",
+            "Included a 'Business Rule Engine' for user-friendly severity classifications."
+          ],
+          techStack: [TECH.REACT, TECH.TYPESCRIPT, TECH.PYTHON, TECH.PYTORCH, TECH.DOCKER, TECH.MARKDOWN],
+          liveDemoUrl: "https://aurascan-ai.vercel.app/",
+          sourceCodeUrl: "https://github.com/MdEhsanulHaqueKanan/aurascan-ai",
+        },
+      ];
+      const TECHNOLOGIES = [
+          {
+              category: TechCategory.AI_LLM,
+              technologies: [TECH.PYTORCH, TECH.TENSORFLOW]
+          },
+          {
+              category: TechCategory.BACKEND,
+              technologies: [TECH.PYTHON, TECH.FLASK]
+          },
+          {
+              category: TechCategory.FRONTEND,
+              technologies: [TECH.REACT, TECH.TYPESCRIPT]
+          },
+          {
+              category: TechCategory.MLOPS_DEPLOYMENT,
+              technologies: [TECH.DOCKER, TECH.GITHUB]
+          },
+          {
+              category: TechCategory.CLOUD,
+              technologies: [TECH.AWS]
+          },
+          {
+              category: 'Documentation & Writing Tools',
+              technologies: [TECH.DOCUSAURUS, TECH.MARKDOWN, TECH.MERMAID, TECH.POSTMAN, TECH.SEO]
+          }
+      ];
+
+      const NAV_LINKS = [
+          { name: 'Projects', href: '#projects' },
+          { name: 'Stack', href: '#stack' },
+          { name: 'About', href: '#about' },
+          { name: 'Contact', href: '#contact' },
+      ];
+      const SOCIAL_LINKS = {
+          linkedIn: "https://www.linkedin.com/in/ehsanulhaquekanan/",
+          github: "https://github.com/MdEhsanulHaqueKanan",
+          email: "ehsanul.kanan92@gmail.com"
+      };
+
+      const Header = () => {
+        return (
+          <header className="sticky top-0 z-50 bg-slate-900/70 backdrop-blur-lg border-b border-slate-700/50">
+            <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex items-center justify-between h-16">
+                <div className="flex-shrink-0">
+                  <a href="#" className="text-white font-bold text-xl tracking-tight">
+                    Ehsanul
+                  </a>
+                </div>
+                <div className="hidden md:block">
+                  <div className="ml-10 flex items-baseline space-x-4">
+                    {NAV_LINKS.map((item) => (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        className="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                      >
+                        {item.name}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </nav>
+          </header>
+        );
+      };
+
+      const Hero = () => {
+        return (
+          <section id="home" className="py-24 sm:py-32">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12">
+              <div className="md:w-2/3 text-center md:text-left">
+                <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+                  <span className="block">Hi, I'm Ehsanul. 👋</span>
+                  <span className="block text-indigo-400">AI Engineer & Technical Writer</span>
+                </h1>
+                <p className="mt-6 text-lg max-w-3xl leading-8 text-slate-400">
+                   I build intelligent, data-driven applications from prototype to production, and I write the clear, concise documentation that makes them successful.
+                </p>
+                <div className="mt-10 flex items-center justify-center md:justify-start gap-x-6">
+                  <a
+                    href="#projects"
+                    className="rounded-md bg-indigo-600 px-4 py-3 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-colors"
+                  >
+                    Explore My Work
+                  </a>
+                </div>
+              </div>
+              <div className="md:w-1/3 flex justify-center">
+                  <div className="w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden bg-slate-800 ring-4 ring-indigo-500/50 shadow-2xl">
+                      <img
+                          className="w-full h-full object-cover"
+                          src="/public/assets/images/headshot/ehsanul-face.jpeg"
+                          alt="Professional headshot of Ehsanul"
+                      />
+                  </div>
+              </div>
+            </div>
+          </section>
+        );
+      };
+
+      const ExternalLinkIcon = () => (
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 ml-1.5">
+              <path d="M12.232 4.232a2.5 2.5 0 0 1 3.536 3.536l-1.225 1.224a.75.75 0 0 0 1.061 1.06l1.224-1.224a4 4 0 0 0-5.656-5.656l-3 3a4 4 0 0 0 .225 5.865.75.75 0 0 0 .976-1.138 2.5 2.5 0 0 1-.142-3.665l3-3Z" />
+              <path d="M8.603 17.397a.75.75 0 0 0-.976 1.138 4 4 0 0 0 5.656-5.656l-1.224-1.224a.75.75 0 0 0-1.061-1.06l-1.224 1.224a2.5 2.5 0 0 1-3.536-3.536l1.225-1.224a.75.75 0 0 0-1.06-1.06l-1.225 1.224a4 4 0 0 0 5.657 5.656l3-3a4 4 0 0 0-.225-5.865.75.75 0 0 0-.976 1.138 2.5 2.5 0 0 1 .142 3.665l-3 3Z" />
+          </svg>
+      );
+      const TechPill = ({ tech }) => (
+          <div className="flex items-center gap-2 bg-slate-700/50 text-slate-300 text-xs font-medium px-2.5 py-1 rounded-full">
+              {tech.icon}
+              {tech.name}
+          </div>
+      );
+      const ProjectCard = ({ project }) => (
+          <div className="bg-slate-800 rounded-lg overflow-hidden shadow-lg hover:shadow-indigo-500/20 transition-all duration-300 group flex flex-col">
+              <div className="overflow-hidden">
+                  <img src={project.image} alt={project.title} className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300" />
+              </div>
+              <div className="p-6 flex flex-col flex-grow">
+                  <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
+                  <p className="text-slate-400 mb-4 text-sm leading-relaxed flex-grow">{project.summary}</p>
+                  
+                  <div className="mb-4">
+                      <h4 className="font-semibold text-slate-300 text-sm mb-2">Highlights:</h4>
+                      <ul className="list-disc list-inside space-y-1 text-slate-400 text-sm">
+                          {project.highlights.map((highlight, index) => (
+                              <li key={index}>{highlight}</li>
+                          ))}
+                      </ul>
+                  </div>
+
+                  <div className="mb-6">
+                      <h4 className="font-semibold text-slate-300 text-sm mb-2">Tech Stack:</h4>
+                      <div className="flex flex-wrap gap-2">
+                          {project.techStack.map((tech) => (
+                              <TechPill key={tech.name} tech={tech} />
+                          ))}
+                      </div>
+                  </div>
+
+                  <div className="mt-auto pt-4 border-t border-slate-700 flex items-center justify-start gap-4">
+                      {project.liveDemoUrl && (
+                          <a href={project.liveDemoUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-md text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-500 px-4 py-2 transition-colors">
+                              {project.sourceCodeUrl === null ? 'Read Article' : '➡️ View Live'}
+                              <ExternalLinkIcon />
+                          </a>
+                      )}
+                      {project.sourceCodeUrl && (
+                        <a href={project.sourceCodeUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-md text-sm font-semibold text-slate-300 bg-slate-700 hover:bg-slate-600 px-4 py-2 transition-colors">
+                            📂 Source Code
+                            <GitHubIcon className="w-4 h-4 ml-1.5"/>
+                        </a>
+                      )}
+                  </div>
+              </div>
+          </div>
+      );
+      
+      const Projects = () => {
+        return (
+          <section id="projects" className="py-20 sm:py-24 bg-slate-900">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center">
+                <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
+                  Featured Work
+                </h2>
+                <p className="mt-4 max-w-2xl mx-auto text-lg text-slate-400">
+                  A selection of my writing and engineering projects that showcase my ability to communicate complex ideas clearly.
+                </p>
+              </div>
+              <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                {PROJECTS.map((project) => (
+                  <ProjectCard key={project.title} project={project} />
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      };
+
+      const TechStack = () => {
+        return (
+          <section id="stack" className="py-20 sm:py-24 bg-slate-800/50">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center">
+                <h2 className="text-3xl font-extrabold text-white sm:text-4xl">My Technology Stack</h2>
+                <p className="mt-4 max-w-2xl mx-auto text-lg text-slate-400">
+                  The tools and technologies I use to bring ideas to life, from prototype to production.
+                </p>
+              </div>
+              <div className="mt-12 space-y-12">
+                {TECHNOLOGIES.map((categoryItem) => (
+                  <div key={categoryItem.category} className="bg-slate-800 p-6 rounded-lg shadow-lg">
+                    <h3 className="text-xl font-bold text-indigo-400 mb-6">{categoryItem.category}</h3>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                      {categoryItem.technologies.map((tech) => (
+                        <div key={tech.name} className="flex flex-col items-center justify-center text-center p-4 bg-slate-700/50 rounded-lg hover:bg-slate-700 transition-colors">
+                          <div className="text-indigo-300 mb-2">{tech.icon}</div>
+                          <span className="text-sm font-medium text-slate-300">{tech.name}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      };
+
+      const About = () => {
+        return (
+          <section id="about" className="py-20 sm:py-24 bg-slate-900">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+              <h2 className="text-3xl font-extrabold text-white sm:text-4xl">About Me</h2>
+              <div className="mt-8 text-lg text-slate-400 space-y-6 text-left leading-8">
+                <p>
+                  I'm an End-to-End AI Engineer and a top-rated Technical Writer. I bring a unique blend of hands-on experience building AI-powered systems from concept to production, coupled with extensive expertise in creating impactful documentation for both technical and non-technical audiences.
+                </p>
+                <p>
+                  My unique edge is communication. Beyond engineering, my background as a technical writer for US-based tech companies has equipped me with the ability to translate complex technical concepts into clear, actionable documentation. I excel at bridging the gap between engineering teams and end-users.
+                </p>
+                <p>
+                  My goal is to leverage my technical depth to create high-impact content that simplifies technology, empowers users, and strengthens a company’s visibility and expertise.
+                </p>
+              </div>
+            </div>
+          </section>
+        );
+      };
+
+      const Contact = () => {
+        return (
+          <section id="contact" className="py-20 sm:py-24 bg-slate-800/50">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center">
+                <h2 className="text-3xl font-extrabold text-white sm:text-4xl">Let's Connect!</h2>
+                <p className="mt-4 max-w-2xl mx-auto text-lg text-slate-400">
+                  I'm always open to discussing new projects, creative ideas, or opportunities to be part of an ambitious team.
+                </p>
+              </div>
+              <div className="mt-12 flex justify-center items-center gap-6">
+                <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">
+                  <GitHubIcon className="w-8 h-8" />
+                </a>
+                <a href={SOCIAL_LINKS.linkedIn} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">
+                  <LinkedInIcon className="w-8 h-8" />
+                </a>
+                 <a href={`mailto:${SOCIAL_LINKS.email}`} className="text-slate-400 hover:text-white transition-colors">
+                  <EmailIcon className="w-8 h-8" />
+                </a>
+              </div>
+            </div>
+          </section>
+        );
+      };
+
+      const App = () => {
+        return (
+          <div className="bg-slate-900">
+            <Header />
+            <main>
+              <Hero />
+              <Projects />
+              <TechStack />
+              <About />
+              <Contact />
+            </main>
+            <footer className="bg-slate-900 text-center py-6">
+              <p className="text-slate-500 text-sm">&copy; {new Date().getFullYear()} Ehsanul. All rights reserved.</p>
+            </footer>
+          </div>
+        );
+      };
+
+      const rootElement = document.getElementById('root');
+      if (!rootElement) {
+        throw new Error("Could not find root element to mount to");
+      }
+      const root = ReactDOM.createRoot(rootElement);
+      root.render(
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      );
+    </script>
+</body>
+</html>
